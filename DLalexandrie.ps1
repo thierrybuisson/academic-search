@@ -4,8 +4,14 @@ $jsonConfigFile = "alexandrie.json"
 
 $JSON = Get-Content $jsonConfigFile | Out-String | ConvertFrom-Json
 foreach( $book in $JSON.entities ) {
-    $bcontent = $book.E | ConvertFrom-Json
-    write-host $bcontent
+    $bcontent = $book.E 
+    foreach ($c in $bcontent){
+$c
+        $t = $c.DN
+        $t
+
+    }
+    # write-host $bcontent
     
-    $bcontent.DN 
+    # $bcontent.DN 
 }
