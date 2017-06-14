@@ -1,21 +1,34 @@
 
+
+function CleanJsonFlux($strin){
+    $sout = $strin.ToString().Replace("The","_The")
+    $sout = $sout.ToString().Replace("We","_We")
+    $sout = $sout.ToString().Replace("Oriented","_Oriented")
+    $sout = $sout.ToString().Replace("This","_This")
+    
+    return $sout
+
+}
+
 # https://stackoverflow.com/questions/16575419/powershell-retrieve-json-object-by-field-value
 $jsonConfigFile = "alexandrie.json"
-$jsoncontent = $(Get-Content $jsonConfigFile).Replace('\"','"')
-$JSON = $jsoncontent  | ConvertFrom-Json
+$JSON = $(Get-Content $jsonConfigFile) | Out-string | ConvertFrom-Json
 foreach( $book in $JSON.entities ) {
-    $bcontent = $book.E 
-
-   $i = $bcontent[0]
-   $i
-   write-host ""
-    # foreach ($c in $bcontent){
-    #     $c.DN
-    #     $t = $c  | ConvertFrom-Json
-    #     # $t
-
-    # }
-    # write-host $bcontent
-    
+    $bcontent = $book
+    $year = $bcontent.Y
+    $title = $bcontent.Ti
+$title
+    $description = $bcontent.E
+#   $description
+[regex]::Matches([string]$description,'(?<=")(.+)(?=":)') |
+foreach {
+    $_.groups[1].value
+}
+# $description 
+    # $description 
+ 
+#  $description  | ConvertFrom-Json
+     
     # $bcontent.DN 
 }
+
